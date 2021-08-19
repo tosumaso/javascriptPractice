@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/springCss.css}" rel="stylesheet" type="text/css" />
+<script src="//teppeis.github.io/htmlspecialchars/index.js"></script>
+<title>SpringScript</title>
+</head>
+<body>
+	<h2>Hi Guys!</h2>
+	<button onclick="main()">Get user info</button>
+	<div id="result"></div>
+	<script th:src="@{/js/trial.js}"></script> <!-- htmlのコンテンツを全て読み込んでからDOM操作を行うため</body>の手前でjsを読み込む -->
+</body>
+</html>
