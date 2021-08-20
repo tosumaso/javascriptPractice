@@ -4,3 +4,11 @@ h2 {
 	color:red;
 }
 
+.box-fadein img {
+  opacity: 0;
+  -webkit-transition: opacity 3s;
+  transition: opacity 3s;
+}
+.box-fadein.lazyloaded img.lazyloaded {
+  opacity: 1;
+}
