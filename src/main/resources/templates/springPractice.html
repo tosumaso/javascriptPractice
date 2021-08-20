@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/springCss.css}" rel="stylesheet" type="text/css" />
+<script th:src="@{/js/lazysizes.min.js}" ></script> <!--1:画像の非同期ローディングライブラリのコードをローカルのjsにダウンロードして読み込む -->
+<title>Practice!</title>
+</head>
+<body>
+	<h2>Hi</h2>
+		<img  data-src="/imgs/sample.jpeg"  class="lazyload" >
+		<img  data-src="/imgs/sample2.jpeg"  class="lazyload">
+		<img  data-src="/imgs/sample3.jpeg"  class="lazyload" >
+		<img  data-src="/imgs/sample4.jpeg"  class="lazyload" >
+		<img  data-src="/imgs/sample5.jpeg"  class="lazyload" >
+		<img  data-src="/imgs/sample6.jpeg" class="lazyload">
+		<img  data-src="/imgs/sample7.jpeg"  class="lazyload" >
+</body>
+</html>

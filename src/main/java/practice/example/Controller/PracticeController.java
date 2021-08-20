@@ -15,4 +15,9 @@ public class PracticeController {
 	public String getIndex() {
 		return "/index";
 	}
+	
+	@GetMapping("/getPractice")
+	public String getPractice() {
+		return "/springPractice";
+	}
 }
