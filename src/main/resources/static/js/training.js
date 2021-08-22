@@ -1,4 +1,14 @@
 
+/* document.addEventListener('DOMContentLoaded', function(){
+
+  var img_element = document.querySelector("#kain");
+
+    // 画像読み込み完了したときの処理
+    img_element.addEventListener('load', ()=> {
+      console.log("load");
+    });
+}); */
+
 const obj = {
 	level: 1,
 	nest: {
