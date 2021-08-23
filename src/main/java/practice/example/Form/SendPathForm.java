@@ -1,4 +1,4 @@
-package practice.example;
+package practice.example.Form;
 
 public class SendPathForm {
 

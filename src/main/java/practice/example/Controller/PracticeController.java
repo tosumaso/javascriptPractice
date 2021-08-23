@@ -1,6 +1,7 @@
 package practice.example.Controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import practice.example.JsonConverter;
-import practice.example.SendPathForm;
+import practice.example.Entity.Mountain;
+import practice.example.Form.JsonConverter;
+import practice.example.Form.MountainForm;
+import practice.example.Form.SendPathForm;
+import practice.example.Repository.MountainRepository;
 
 @Controller
 public class PracticeController {
@@ -23,6 +27,9 @@ public class PracticeController {
 	// Jacksonライブラリ：JavaとJsonの変換を行う、インスタンスをDIコンテナ
 	@Autowired
 	ObjectMapper mapper;
+	
+	@Autowired
+	MountainRepository MtRepository;
 
 	@GetMapping("/getMain")
 	public String getMain() {
@@ -72,5 +79,21 @@ public class PracticeController {
 		}
 		System.out.println(json);
 		return json;
+	}
+	
+	@PostMapping("/send/data/db")
+	public String postAjaxToDB(MountainForm form) { //httpリクエストのFormDataをFormObjectで受け取り、Repositoryでセーブ
+			Mountain mountain = new Mountain();
+			mountain.setName(form.getName());
+			mountain.setHeight(form.getHeight());
+			MtRepository.save(mountain);
+			return "redirect:/get/index"; //リダイレクト先でJSONを返しても非同期のまま
+	}
+	
+	@GetMapping("/get/index")
+	@ResponseBody
+	public List<Mountain> getIndexAjax(){
+		List<Mountain> data =MtRepository.findAll();
+		return data;
 	}
 }
