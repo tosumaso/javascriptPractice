@@ -25,3 +25,9 @@
 	2. FormObjectから値を取り出しRepositoryを使ったDB処理を行う。戻り値はJSONで返す。
 	3. springからEntityをListにしたJSONが返されてJSでJSONからJSのオブジェクトに整形した場合、配列でレコードが格納されている
 	
+4. FileReaderを使った画像のプレビュー表示、画像をドラッグしてアップロード
+
+	1. 画像のドラッグ先の要素にdragover,dragleave,dropのイベントを登録する。
+	2. FileReaderでアップロードした画像の情報を操作し、readAsDataUrlでその画像のURIを取得。FileReader.resultに格納される
+	3. `<img>`のsrc属性にURIを持ったFileReader.resultをセットし、任意の要素に格納する。
+	

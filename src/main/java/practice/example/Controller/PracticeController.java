@@ -96,4 +96,9 @@ public class PracticeController {
 		List<Mountain> data =MtRepository.findAll();
 		return data;
 	}
+	
+	@GetMapping("/get/fileUploader")
+	public String getFileUploader() {
+		return "/fileUpload";
+	}
 }
