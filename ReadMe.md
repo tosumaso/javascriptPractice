@@ -31,3 +31,19 @@
 	2. FileReaderでアップロードした画像の情報を操作し、readAsDataUrlでその画像のURIを取得。FileReader.resultに格納される
 	3. `<img>`のsrc属性にURIを持ったFileReader.resultをセットし、任意の要素に格納する。
 	
+5. モーダル画面
+	
+	1. JSでモーダル画面の背景にdisplay:blockやnoneを挿入して表示を切り替える
+	2. モーダル画面はz-indexで手前に来るように調整し、rgbaの透明度は0.5ぐらいにして半透明にする
+	3. モーダル画面は閉じるボタンまたはモーダル背景をクリックすることで閉じ、eventのターゲットがmodal背景なら閉じれる
+	
+6. Css(block,inline,inline-block)
+
+	1. inline-block: inline要素の特徴に上下左右のmargin,paddingが可能と高さと幅を指定できるようになったもの。
+	2. `inline-block`は横並びにしたい要素につける、`display:flex`は要素を横並びにしたい子要素の親要素につける。
+	
+7. グローバルメニュー
+	
+	1. グローバルメニューの一覧に表示する目次を`<ul>`内に`<li>`で書き、そのliタグ内にドロップダウンで表示する項目を`<ul>`、`<li>`でネストする
+	
+8. 

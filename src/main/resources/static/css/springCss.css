@@ -12,6 +12,8 @@ h2 {
 .box-fadein.lazyloaded img.lazyloaded {
   opacity: 1;
 } */
+
+/* 画像のプレビュー表示、ドラッグ式アップロード　*/
 #drop-zone {
 	border: 5px dashed #000000;
 	padding: 50px;
@@ -23,7 +25,7 @@ h2 {
 }
 
 #preview {
-	display:flex;
+	display: flex;
 	flex-wrap: wrap;
 }
 
@@ -31,4 +33,22 @@ h2 {
 	width: 100px;
 	margin: 10px;
 	cursor: move;
+}
+
+/*　モーダル画面 */
+.modal {
+	display:none;
+	position: fixed;
+	z-index: 1;  /* 数値が高いほど重なっている要素が手前にくる*/
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0,0,0,0.5); /* rgba(red,green,blue,opacity)：色を三原色で表記、opacityは0から1で透明度を変更可能*/
+}
+
+.modal-content {
+	background-color: white;
+	width: 500px;
+	margin: 40% auto;
 }

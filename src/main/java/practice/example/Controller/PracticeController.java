@@ -101,4 +101,14 @@ public class PracticeController {
 	public String getFileUploader() {
 		return "/fileUpload";
 	}
+	
+	@GetMapping("/getCss")
+	public String getCss() {
+		return "/IndexCss";
+	}
+	
+	@GetMapping("/getGlobalMenu")
+	public String getGlobalMenu() {
+		return "/globalmenu";
+	}
 }
