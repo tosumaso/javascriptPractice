@@ -1,5 +1,5 @@
 // １文字ずつアニメーション
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", () => {
 	const CLASSNAME = "-visible";
 	const TIMEOUT = 1500;
 	const target = document.querySelector(".title");
@@ -11,4 +11,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 		}, TIMEOUT);
 	}, TIMEOUT * 2);
 })
-	
+
+window.addEventListener("load",()=>{
+		document.getElementById("loader-wrap").classList.add("loadingNone")
+})

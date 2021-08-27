@@ -111,4 +111,14 @@ public class PracticeController {
 	public String getGlobalMenu() {
 		return "/globalmenu";
 	}
+	
+	@GetMapping("/getDrawerMenu")
+	public String getDrawerMenu() {
+		return "/drawermenu";
+	}
+	
+	@GetMapping("/getLikes")
+	public String getLikes() {
+		return "/likes";
+	}
 }
