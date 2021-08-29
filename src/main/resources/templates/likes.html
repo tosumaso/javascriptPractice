@@ -2,9 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<script th:src="@{/js/likes.js}"></script>
 <title>Likes Practice</title>
 </head>
 <body>
-
+	<h3>Click this image</h3>
+	<div>You liked <span id="times" th:text="${likes}"></span>!</div>
+	<img src="/imgs/sample.jpeg" class="loveMe" id="favourite">
+	
 </body>
 </html>

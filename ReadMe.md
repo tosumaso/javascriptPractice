@@ -52,4 +52,11 @@
 	2. contentプロパティは必須で、いらない場合は空文字を指定できる
 	3. 擬似要素に`position:absolute`をつけると擬似要素の作成元の要素が親要素となりrelativeを持つ。
 	
-9. 
+9. いいね機能(DB相関図:user hasmany posts,hasmany favourites, post belongsto user, hasone favourite, favourite belongsto user,belongsto post)
+
+	1. いいねが押されたらajax通信を行い、サーバーでいいね機能テーブルの外部参照先の情報を取得して外部参照キーとして保存
+	2. トップ画面を表示する際、現状のいいねレコードをリポジトリ経由で取得後、その総数を`List<Favourite>.size()`で取得して戻り値で返す。
+	3. 言い値送信後はレコードを保存し、総数をjsonで返し、DOMで描画する
+	
+10. 
+

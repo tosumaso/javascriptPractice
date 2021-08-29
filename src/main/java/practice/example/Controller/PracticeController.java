@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import practice.example.Entity.Favourite;
 import practice.example.Entity.Mountain;
+import practice.example.Entity.Post;
+import practice.example.Entity.User;
 import practice.example.Form.JsonConverter;
 import practice.example.Form.MountainForm;
 import practice.example.Form.SendPathForm;
+import practice.example.Repository.FavouriteRepository;
 import practice.example.Repository.MountainRepository;
 
 @Controller
@@ -30,6 +34,9 @@ public class PracticeController {
 	
 	@Autowired
 	MountainRepository MtRepository;
+	
+	@Autowired
+	FavouriteRepository fvRepository;
 
 	@GetMapping("/getMain")
 	public String getMain() {
@@ -118,7 +125,19 @@ public class PracticeController {
 	}
 	
 	@GetMapping("/getLikes")
-	public String getLikes() {
+	public String getLikes(Model model) {
+		int favourites = fvRepository.findAll().size();
+		model.addAttribute("likes", favourites);
 		return "/likes";
+	}
+	
+	@GetMapping("/send/Myfavourite") //いいねボタンが押されたら参照先のUserとPostに仮のidをはめてインスタンス化してFavouriteEntityにセット
+	@ResponseBody	
+	public List<Favourite> countUpFavourite() { //外部参照キーを2つ持たせて保存しFavouriteのレコードを全て(今回は画像が1つだから全てのレコード)を取得する
+		Favourite newFavourite = new Favourite();
+		newFavourite.setBoth(new User(1), new Post(2)); //本来は動的にユーザーidとポストidは取得する必要がある
+		fvRepository.save(newFavourite);
+		List<Favourite> favourites =fvRepository.findAll(); //ブラウザにJsonで返してオブジェクトに変換、コレクションオブジェクトの長さを取得して表示ができるか検証
+		return favourites;
 	}
 }
