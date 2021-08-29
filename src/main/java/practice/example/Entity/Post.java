@@ -20,6 +20,9 @@ public class Post {
 	@Column
 	private String content;
 	
+	@Column
+	private Integer star;
+	
 	@ManyToOne
 	@JoinColumn(name="user_id", referencedColumnName="id")
 	private User user;
@@ -47,6 +50,14 @@ public class Post {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public Integer getStar() {
+		return star;
+	}
+
+	public void setStar(Integer star) {
+		this.star = star;
 	}
 
 	public User getUser() {

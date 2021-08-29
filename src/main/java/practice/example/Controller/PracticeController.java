@@ -2,6 +2,7 @@ package practice.example.Controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ import practice.example.Form.MountainForm;
 import practice.example.Form.SendPathForm;
 import practice.example.Repository.FavouriteRepository;
 import practice.example.Repository.MountainRepository;
+import practice.example.Repository.PostRepository;
 
 @Controller
 public class PracticeController {
@@ -37,6 +39,9 @@ public class PracticeController {
 	
 	@Autowired
 	FavouriteRepository fvRepository;
+	
+	@Autowired
+	PostRepository postRepository;
 
 	@GetMapping("/getMain")
 	public String getMain() {
@@ -139,5 +144,14 @@ public class PracticeController {
 		fvRepository.save(newFavourite);
 		List<Favourite> favourites =fvRepository.findAll(); //ブラウザにJsonで返してオブジェクトに変換、コレクションオブジェクトの長さを取得して表示ができるか検証
 		return favourites;
+	}
+	
+	@PostMapping("/send/starRating") //星で評価を行いチェックされた星の数をformDataで送る
+	@ResponseBody
+	public int sendStarRating(int star) {
+		Optional<Post> post =postRepository.findById(2); //本来は評価されたpostのidを動的に取得する
+		post.ifPresent(con -> con.setStar(star));
+		post.ifPresent(con -> postRepository.save(con));
+		return star;
 	}
 }
