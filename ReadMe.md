@@ -68,3 +68,12 @@
 	1. タグ機能とタグをつける対象にテーブルを分け、manytomanyの組み合わせを管理する中間テーブルを作成。両者のテーブルには外部参照キーをつけず、中間テーブルに２つつける。
 	2. manytomanyの親に`@JoinTable`で中間テーブルの定義を書き、子にmappedByで親の外部参照フィールドを指定する
 	3. manytomanyでは片方のentityを作成して値をセット、もう片方のentityも値をセットし,`親entity.get子の外部参照.add(子のentity)`と`子entity.get親の外部参照.add(親のentity)`で外部参照情報を持たせてentityを作成し、片方のrepositoryを経由して保存する
+	
+12. Cascade(DBの外部参照制約とspringの相関につける)
+
+	1. Cascade: 外部参照先のオブジェクトに変更が加えられたときの参照元オブジェクトの変化を指定すること
+	2. Cascadeオプション Restrict:update/delete エラーになる Cascade:updateは参照先に依存,deleteは参照先がなくなると参照元も削除される
+	3. Cascadeオプション Set Null:update/delete nullに置き換わる
+	4. springの`@OneToMany`や`@ManyToMany`などのオプションにcascade = CascadeType.ALLをつけることでそのentityの変化がもう一つのentityに反映される
+	
+13. 

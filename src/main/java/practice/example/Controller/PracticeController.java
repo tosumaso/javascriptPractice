@@ -205,7 +205,7 @@ public class PracticeController {
 		return "/tag";
 	}
 	
-	@GetMapping("/search")
+	@GetMapping("/search") //カテゴリ名検索
 	public String searchByCategory(@RequestParam(name="name") String name, Model model) {
 		List<Category> categories =categoryRepository.findByName(name); //クリックしたカテゴリ名をもつカテゴリのレコードを検索
 		model.addAttribute("categories", categories);

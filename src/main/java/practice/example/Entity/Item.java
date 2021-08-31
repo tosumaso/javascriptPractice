@@ -26,7 +26,7 @@ public class Item {
 	@Column
 	private String content;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) //CascadeType.ALL:: 中間テーブルの外部参照キーのon update/delete cascadeと連動して、itemが削除されたらそれと紐づくcategoryおよび中間テーブルの組み合わせを削除する
 	@JoinTable(name = "category_item", joinColumns = {@JoinColumn(name = "item_id")}, inverseJoinColumns = {@JoinColumn(name = "category_id")})
 	private List<Category> categories = new ArrayList<>();
 

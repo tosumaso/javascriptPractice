@@ -3,7 +3,6 @@ package practice.example.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +23,7 @@ public class Category {
 	@Column
 	private String name;
 
-	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "categories") // mappedBy: 双方向の関係性を表し、2つのentityの関係(entity1 to entity2、entity2 to entity1)を１つにまとめる
+	@ManyToMany(mappedBy = "categories") // mappedBy: 双方向の関係性を表し、2つのentityの関係(entity1 to entity2、entity2 to entity1)を１つにまとめる
 	private List<Item> items = new ArrayList<>(); //初期化されていない状態でゲッターが呼び出させてもぬるぽにならないように空のListで初期化しておく
 
 	public Category() {
