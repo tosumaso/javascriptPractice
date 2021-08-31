@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:href="@{/css/favourite.css}" rel="stylesheet" type="text/css" />
+<meta charset="UTF-8">
+<title>Tag Practice</title>
+</head>
+<body>
+	<form th:method="post" th:action="@{/registerTag}">
+		<input type="text" name="content">
+		<input type="text" name="categoryName"> <!-- 同じ名前のパラメータを複数送ることでFormObject内でCollectionで管理できる -->
+		<input type="text" name="categoryName">
+		<input type="text" name="categoryName">
+		<input type="submit" value="タグの登録">
+	</form>
+	<div class="item-list">
+		<th:block th:each="item: ${items}"> <!-- categoryの参照を持つList<Item> itemsを受け取る -->
+		<div class="post-content">
+			<div th:text="'投稿内容: ' + ${item.content}"></div>
+			<th:block th:each= "category :${item.categories}"> <!-- th:eachで取り出したitemレコードのcategoryの外部参照を取り出す -->
+				<a th:text="'カテゴリ: ' + ${category.name}" th:href="@{/search/(name=${category.name})}"></a>
+			</th:block>
+		</div>
+		</th:block>
+		
+		<!-- <th:block th:each="category: ${categories}"> categoryからitemを参照する場合
+			<div th:text="${category.id}"></div>
+			<div th:text="${category.name}"></div> 
+			<th:block th:each= "item :${category.items}"> 
+				<div th:text="${item.id}"></div>
+				<div th:text="${}"></div>
+			</th:block>
+		</th:block> -->
+	</div>
+</body>
+</html>

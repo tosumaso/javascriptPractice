@@ -3,6 +3,7 @@ package practice.example.Controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,16 +17,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import practice.example.Entity.Category;
 import practice.example.Entity.Favourite;
+import practice.example.Entity.Item;
 import practice.example.Entity.Mountain;
 import practice.example.Entity.Post;
 import practice.example.Entity.User;
+import practice.example.Form.ItemWithCategories;
 import practice.example.Form.JsonConverter;
 import practice.example.Form.MountainForm;
 import practice.example.Form.SendPathForm;
+import practice.example.Repository.CategoryRepository;
 import practice.example.Repository.FavouriteRepository;
+import practice.example.Repository.ItemRepository;
 import practice.example.Repository.MountainRepository;
 import practice.example.Repository.PostRepository;
+import practice.example.Repository.UserRepository;
 
 @Controller
 public class PracticeController {
@@ -41,7 +48,16 @@ public class PracticeController {
 	FavouriteRepository fvRepository;
 	
 	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
 	PostRepository postRepository;
+	
+	@Autowired
+	ItemRepository itemRepository;
+	
+	@Autowired
+	CategoryRepository categoryRepository;
 
 	@GetMapping("/getMain")
 	public String getMain() {
@@ -153,5 +169,46 @@ public class PracticeController {
 		post.ifPresent(con -> con.setStar(star));
 		post.ifPresent(con -> postRepository.save(con));
 		return star;
+	}
+	
+	@GetMapping("/getTag")
+	public String getTag(Model model) {
+		List<Item> items=itemRepository.findAll();
+		model.addAttribute("items",items);
+		return "/tag";
+	}
+	
+	@PostMapping("/registerTag") //1つのformでmanytomanyの２つのテーブルの値を保存する
+	public String registerTag(ItemWithCategories form,Model model) { 
+		Item item = new Item();
+		item.setContent(form.getContent()); //片方のentityを作成してカラムに値をセット
+		List<Category> categories = 
+			form.getCategoryName().stream().map(i -> new Category(i)).collect(Collectors.toList()); //もう片方のentityを作成し値をセット
+		categories.forEach(ct -> item.getCategories().add(ct)); //リスト型のentityの外部参照フィールドに参照先のレコード(Category)をadd
+		categories.forEach(ct -> ct.getItems().add(item)); //もう片方のリスト型の外部参照フィールドにも参照先のレコード(Item)をadd
+		itemRepository.save(item); //外部参照を持たせた片方のentityを保存することで両方のentityを更新できる。
+
+		model.addAttribute("items", itemRepository.findAll());
+		return "/tag";
+	}
+	
+	@PostMapping("/registerCategory") //manytomanyでは両方のentityから参照することが可能
+	public String registerCategory(ItemWithCategories form,Model model) {
+		Item item = new Item();
+		List<Category> categories = 
+			form.getCategoryName().stream().map(i -> new Category(i)).collect(Collectors.toList());
+		categories.forEach(ct -> item.getCategories().add(ct)); 
+		categories.forEach(ct -> ct.getItems().add(item));
+		categoryRepository.saveAll(categories);// mappedByをつけているentityからも外部参照を持つことができ、viewに情報を送れる
+		
+		model.addAttribute("categories", categoryRepository.findAll());
+		return "/tag";
+	}
+	
+	@GetMapping("/search")
+	public String searchByCategory(@RequestParam(name="name") String name, Model model) {
+		List<Category> categories =categoryRepository.findByName(name); //クリックしたカテゴリ名をもつカテゴリのレコードを検索
+		model.addAttribute("categories", categories);
+		return "/searchResult";
 	}
 }

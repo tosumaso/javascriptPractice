@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Search Result</title>
+</head>
+<body>
+	<th:block th:each="category: ${categories}">
+		<div class="post-content">
+			<div th:text="'カテゴリ名: ' + ${category.name}"></div> <!-- 検索したカテゴリ名に紐づく外部参照先のデータを取得 -->
+			<th:block th:each= "item :${category.items}"> 
+				<div th:text="'投稿内容: ' + ${item.content}"></div>
+			</th:block>
+		</div>
+	</th:block>
+</body>
+</html>

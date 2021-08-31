@@ -63,3 +63,8 @@
 	1. 星マークにマウスオーバーしたとき、外れたとき、クリックしたときのイベントに分ける
 	2. 最終的にチェックがついた星の数をサーバーに送る。
 
+11. タグ登録、検索機能(DB相関図: item hasmany categories, category hasmany items, jointable)
+
+	1. タグ機能とタグをつける対象にテーブルを分け、manytomanyの組み合わせを管理する中間テーブルを作成。両者のテーブルには外部参照キーをつけず、中間テーブルに２つつける。
+	2. manytomanyの親に`@JoinTable`で中間テーブルの定義を書き、子にmappedByで親の外部参照フィールドを指定する
+	3. manytomanyでは片方のentityを作成して値をセット、もう片方のentityも値をセットし,`親entity.get子の外部参照.add(子のentity)`と`子entity.get親の外部参照.add(親のentity)`で外部参照情報を持たせてentityを作成し、片方のrepositoryを経由して保存する

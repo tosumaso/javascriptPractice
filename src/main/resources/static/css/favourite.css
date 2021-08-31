@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+/* 星のレーティング機能*/
 #stars > .star {
 	color: #FF9900;
+}
+
+/* タグ機能*/
+.post-content {
+	border: 1px solid;
 }
