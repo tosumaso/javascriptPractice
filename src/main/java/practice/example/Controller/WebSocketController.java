@@ -13,7 +13,7 @@ import practice.example.Form.HelloMessage;
 public class WebSocketController {
 	
 	@MessageMapping("/hello")
-	@SendTo("/topic/greetings")
+	@SendTo("/big/greetings")
 	public Greeting greeting(HelloMessage message) throws Exception{
 		Thread.sleep(1000);
 		System.out.println(message.getMessage());

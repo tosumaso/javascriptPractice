@@ -12,7 +12,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 	
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
-		config.enableSimpleBroker("/topic"); // '/topic'宛てに送られたメッセージはBrokerで直接ハンドリングされる
+		config.enableSimpleBroker("/big"); // '/big'宛てに送られたメッセージはBrokerで直接ハンドリングされる
 		config.setApplicationDestinationPrefixes("/app"); // ’/app’宛てにメッセージが送られた場合Controllerを経由し、その結果がBrokerを通りクライアントに渡る
 		
 	}
