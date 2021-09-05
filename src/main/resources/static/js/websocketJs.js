@@ -6,12 +6,11 @@ function setConnected(connected) {
 
 	const conversation = document.querySelector("#conversation");
 	if (connected) {
-		conversation.style.display = "block";
+		
 	}
 	else {
 		conversation.style.display = "none";
 	}
-	document.querySelector("#greetings").innerHTML = "";
 }
 
 function connect() {
@@ -21,7 +20,8 @@ function connect() {
 		setConnected(true);
 		console.log('Connected: ' + frame);
 		stompClient.subscribe('/big/greetings', function(message) {
-			showGreeting(JSON.parse(message.body).content);
+			const record = JSON.parse(message.body);
+			showGreeting(record.content);
 		});
 	});
 }

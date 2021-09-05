@@ -76,4 +76,8 @@
 	3. Cascadeオプション Set Null:update/delete nullに置き換わる
 	4. springの`@OneToMany`や`@ManyToMany`などのオプションにcascade = CascadeType.ALLをつけることでそのentityの変化がもう一つのentityに反映される
 	
-13. 
+13. WebSocket通信(STOMP.JS = ajaxより軽いメッセージ通信が可能なJSライブラリ, Sock.JS = WebSocketを扱うJSライブラリ)
+
+	1. メッセージをJsonで送信し、formで受け取る。
+	2. コンフィグクラスでメッセージを扱うBrokerとEndpointの設定を定義する
+	3. `@MessageMapping`でクライアントからメッセージを受け取り、`@SendTo`で指定したパスをsubscribeしているクライアントにメッセージのレスポンスを渡す

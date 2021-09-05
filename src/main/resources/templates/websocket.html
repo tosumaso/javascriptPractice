@@ -49,6 +49,9 @@
 						</tr>
 					</thead>
 					<tbody id="greetings">
+						<th:block th:each="message :${messages}"> <!-- チャット画面取得時、dbの既存のメッセージを一覧表示する -->
+							<tr><td th:text="${message.content}"></td></tr>
+						</th:block> <!--追加されたメッセージはwebsocket通信の時点ではDOMで描画され、リロードでページを更新するとthymeleafでDBから取得され描画される -->
 					</tbody>
 				</table>
 			</div>
