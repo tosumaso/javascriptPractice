@@ -114,10 +114,24 @@
 	28. volumeファイルはコンテナが削除されてもデータが残る：　初期化したい場合は一度削除してまた作り直す
 	29. docker-compose down (--rmi all)(--volumes): docker-composeファイルで作成したコンテナとネットワークを削除。オプションでcomposeに紐づくイメージとボリュームも削除できる
 	30. docker-compose -f docker-composeファイル名 up: docker-composeファイルを元にイメージ、コンテナの作成
-	31. 
+
+15. Herokuデプロイ(docker無し)
 	
-	
-	
+	1. git init, git add ., git commitでプロジェクトをgitの管理下に置く
+	2. springプロジェクトのroot直下にsystem.propertiesファイルを配置、java.runtime.version=[pomに書かれているjavaのversion]を記載してHerokuで扱える
+	3. git push heroku master
+	4. herokuのgitリポジトリー名、アプリ名を変更: heroku apps:rename [新しい名前]
+	5. mysqlをherokuにデプロイ: heroku addons:create cleardb:[ignite(mysqlを無料で扱う場合はignite)]
+	6. herokuの環境変数を確認: heroku config
+	7. heroku configの中身: 
+		===<アプリ名> Config Vars
+		=== radiant-anchorage-08837 Config Vars
+		CLEARDB_DATABASE_URL: mysql://<ユーザー名>:<パスワード>@<ホスト名>/<データベース名>?reconnect=true
+	   新しい環境変数、DATABASE_URLにCLEARDBで書かれた情報をまとめて変数に設定する
+	   (例:DATABASE_URL:         mysql://bf1ba6f33e7de6:598fffb9@us-cdbr-east-04.cleardb.com/heroku_493a3ece8ba1e69?reconnect=true&characterEncoding=UTF-8&characterSetResults=UTF-8)
+	8. アプリの実行: heroku open
+	9. herokuに登録したレコードはprimary keyが10ずつ増加する、仕様なので変更しない
+	10. 
 	
 	
 	

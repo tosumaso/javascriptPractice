@@ -69,7 +69,7 @@ public class PracticeController {
 	@ResponseBody
 	public List<Mountain> addMt() {
 		Mountain m = new Mountain();
-		m.setName("富士山");
+		m.setName("マウント万");
 		m.setHeight(3776);
 		MtRepository.save(m);
 		return MtRepository.findAll();
