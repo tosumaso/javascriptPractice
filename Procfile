@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/practices-0.0.1-SNAPSHOT.jar
+web: java -Dserver.port=$PORT -jar target/users-mysql.jar
