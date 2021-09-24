@@ -58,10 +58,26 @@ public class PracticeController {
 	
 	@Autowired
 	CategoryRepository categoryRepository;
+	
+	@GetMapping("/getAll")
+	@ResponseBody
+	public List<Mountain> all(){
+		return MtRepository.findAll();
+	}
+	
+	@GetMapping("/addMt")
+	@ResponseBody
+	public List<Mountain> addMt() {
+		Mountain m = new Mountain();
+		m.setName("富士山");
+		m.setHeight(3776);
+		MtRepository.save(m);
+		return MtRepository.findAll();
+	}
 
 	@GetMapping("/getMain")
 	public String getMain() {
-		return "/springScript";
+		return "springScript";
 	}
 	
 	@GetMapping("/getIndex")
@@ -71,12 +87,12 @@ public class PracticeController {
 	
 	@GetMapping("/getPractice")
 	public String getPractice() {
-		return "/springPractice";
+		return "springPractice";
 	}
 	
 	@GetMapping("/ajax")
 	public String getAjax() {
-		return "/ajax";
+		return "ajax";
 	}
 
 	@GetMapping("send/path/url")

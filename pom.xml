@@ -109,6 +109,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<finalName>users-mysql</finalName> <!-- Dockerで扱うためにtarget/下にあるjarファイルの別名を設定 -->
+				</configuration>
 			</plugin>
 			<plugin> <!-- testコードの読み込みを省略 -->
 				<groupId>org.apache.maven.plugins</groupId>

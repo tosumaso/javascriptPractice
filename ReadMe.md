@@ -81,3 +81,42 @@
 	1. メッセージをJsonで送信し、formで受け取る。
 	2. コンフィグクラスでメッセージを扱うBrokerとEndpointの設定を定義する
 	3. `@MessageMapping`でクライアントからメッセージを受け取り、`@SendTo`で指定したパスをsubscribeしているクライアントにメッセージのレスポンスを渡す
+	
+14. Docker(Spring)メモ
+	
+	1. docker pull イメージ名(:タグ名)：ローカルに指定したイメージが無いならDockerHubからイメージをダウンロードする。タグを指定したらタグ付のイメージを取得
+	2. docker run -it -name="コンテナ名" イメージ名:タグ名：　イメージを元にコンテナを作成し、起動してアクセスする。--rmオプションはコンテナが落ちたらコンテナ自身を削除する、テスト用。
+	3. docker run イメージ名：　ローカルに指定したイメージが無いならDockerHubからダウンロードし、コンテナを作成する
+	4. docker images：　dockerイメージの一覧表示、docker rmi イメージ名/Id：　dockerイメージの削除
+	5. docker ps (-a)：　dockerコンテナの一覧表示。aオプションを外すと稼働中のコンテナのみ表示される、 docker rm コンテナ名/Id：　コンテナの削除
+	6. docker restart/start コンテナ名：　停止状態のコンテナを再度起動する
+	7. docker attach/exec コンテナ名：起動している仮想コンテナにアクセスする。attachはexitで抜けた後コンテナが落ちる(ctrl + p + q　でコンテナを立ち上げた状態でmacの操作に戻る)。execはexitで抜けてもコンテナが落ちない
+	8. centOsコンテナ内で yum update -y: centOsのコマンドアップデート、 yum install httpd -y:　httpd(Webサーバーのデーモン)をインストール
+	9. カスタマイズしたコンテナをイメージに直す(同じ環境をコピー): docker commit コピー元のコンテナ名 コピー先/新規のイメージ名 
+	10. docker run -d イメージ名 /usr/sbin/httpd -DFOREGROUND : httpdデーモンを起動した状態でコンテナを起動。docker runの引数にhttpdを起動するコマンドを指定し、コンテナにログインしたときに実行される。Webサーバーの機能に必要
+	11. Portマッピング: ホストOSのportとコンテナのポートを紐づかせる: docker run [--rm] -d -p 8080(macのポート名):80(コンテナのポート名) イメージ名 /usr/sbin/httpd -DFOREGROUND  : macのブラウザからコンテナにアクセス可能
+	12. Volumeマッピング
+	13. Dockerfile: イメージの作成をコードにまとめたファイル。Dockerfileを読み込んでイメージを作成し、そのイメージを元にコンテナを作成し起動すればブラウザからアクセスできる。
+	14. Dockerfileをbuildして作成したイメージを元にコンテナを作成してそのコンテナ内に入る場合: docker exec -it コンテナ名 bash
+	15. Dockerのボリューム/マウントが失敗する場合、DeskTop for MacのGeneral > Use gRPC FUSE for file sharingをオフにする
+	16. MySQLのコンテナを作成: docker run -d --env MYSQL_ROOT_PASSWORD= パスワード名 mysql:[タグ名]　：MySQLのパスワードをLinuxコンテナの環境変数に通す
+	17. MySQLのコンテナにアクセス: docker exec -it コンテナ名 [/bin/]bash ：　コンテナ内でbashにあるシェルを起動し、あとはmysql -u root -pでMySQLを通常通り操作する
+	18. 依存関係やソースコードがjarファイルにまとめられイメージとしてビルドされる。コードを変更した場合はその都度maven installを行いjarファイルを最新の物して、imageを作り直す
+	19. dockerfileでイメージを作成し、docker-composeで複数のコンテナを同時に管理できる
+	20. dockerでthymeleafを使うには、templatesフォルダからの相対パスで書かれていたcontrollerの戻り値を、最初の/を消して指定する
+	21. dockerfile = 公式のイメージにオリジナルの処理を加えイメージを作成する docker-composeのimageプロパティ = 公式のイメージをそのままダウンロードしてイメージ作成
+	22. コンテナを削除するとデータが消える方法　バインドマウント 1: 共有ストレージをコンテナにマウント(コンテナからHostOSのディレクトリを参照できる)する
+	23. コンテナ内のデータを永続化する方法　ボリューム: HostOSのDocker内にボリューム(データの永続的な保存領域)を作成
+	24. docker-composeのservices内に定義されているvolumes:バインドマウント、トップレベルのvolumes:ボリューム
+	25. Docker Desktop for Macが裏で動かしているLinuxOsにアクセスする方法: docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i sh
+	26. バインドマウントでホストディレクトリとコンテナディレクトリを紐づける場合、ホストのディレクトリはfileSharingで指定したパスまたはその子孫である必要がある
+	27. mysqlはmy.cnfファイルを設定ファイルとして参照する：mysqlコンテナで文字コードを設定するためにホストのディレクトリにmy.cnfファイルを新たに作成し、docker-composeファイルのvolumes:内でバインドマウントさせる(例：./my.cnf:/etc/mysql/conf.d/my.cnf :プロジェクト内のmy.cnf:mysqlコンテナの設定ファイルパス)
+	28. volumeファイルはコンテナが削除されてもデータが残る：　初期化したい場合は一度削除してまた作り直す
+	29. docker-compose down (--rmi all)(--volumes): docker-composeファイルで作成したコンテナとネットワークを削除。オプションでcomposeに紐づくイメージとボリュームも削除できる
+	30. docker-compose -f docker-composeファイル名 up: docker-composeファイルを元にイメージ、コンテナの作成
+	
+	
+	
+	
+	
+	
