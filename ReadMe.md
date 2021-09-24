@@ -115,7 +115,7 @@
 	29. docker-compose down (--rmi all)(--volumes): docker-composeファイルで作成したコンテナとネットワークを削除。オプションでcomposeに紐づくイメージとボリュームも削除できる
 	30. docker-compose -f docker-composeファイル名 up: docker-composeファイルを元にイメージ、コンテナの作成
 
-15. Herokuデプロイ(docker無し)
+15. Herokuデプロイ(Gitデプロイ)
 	
 	1. git init, git add ., git commitでプロジェクトをgitの管理下に置く
 	2. springプロジェクトのroot直下にsystem.propertiesファイルを配置、java.runtime.version=[pomに書かれているjavaのversion]を記載してHerokuで扱える
