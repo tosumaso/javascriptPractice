@@ -114,6 +114,7 @@
 	28. volumeファイルはコンテナが削除されてもデータが残る：　初期化したい場合は一度削除してまた作り直す
 	29. docker-compose down (--rmi all)(--volumes): docker-composeファイルで作成したコンテナとネットワークを削除。オプションでcomposeに紐づくイメージとボリュームも削除できる
 	30. docker-compose -f docker-composeファイル名 up: docker-composeファイルを元にイメージ、コンテナの作成
+	31. 
 	
 	
 	
