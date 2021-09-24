@@ -125,13 +125,15 @@
 	6. herokuの環境変数を確認: heroku config
 	7. heroku configの中身: 
 		===<アプリ名> Config Vars
-		=== radiant-anchorage-08837 Config Vars
 		CLEARDB_DATABASE_URL: mysql://<ユーザー名>:<パスワード>@<ホスト名>/<データベース名>?reconnect=true
 	   新しい環境変数、DATABASE_URLにCLEARDBで書かれた情報をまとめて変数に設定する
 	   (例:DATABASE_URL:         mysql://bf1ba6f33e7de6:598fffb9@us-cdbr-east-04.cleardb.com/heroku_493a3ece8ba1e69?reconnect=true&characterEncoding=UTF-8&characterSetResults=UTF-8)
 	8. アプリの実行: heroku open
 	9. herokuに登録したレコードはprimary keyが10ずつ増加する、仕様なので変更しない
-	10. 
+	10. Herokuを立ち上げるときにjarファイルを読み込ませるためにProcfilwを置き指定したjarファイルを読み込む
+		例: web: java -Dserver.port=$PORT -jar target/<jarのファイル名>.jar
+		jarファイルの中にはmanifestが含まれている必要がある(manifestファイルの中にMainClassが定義されていないとno main manifest attributeエラーがでる)
+	11. herokuに上げたアプリの停止: heroku ps:scale web=0
 	
 	
 	
