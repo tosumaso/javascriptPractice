@@ -135,5 +135,11 @@
 		jarファイルの中にはmanifestが含まれている必要がある(manifestファイルの中にMainClassが定義されていないとno main manifest attributeエラーがでる)
 	11. herokuに上げたアプリの停止: heroku ps:scale web=0
 	
-	
+16. Herokuデプロイ(Dockerデプロイ)
+
+	1. heroku container:login : Container Registrにログイン
+	2. heroku create : herokuアプリを作成
+	3. heroku container:push web: イメージをbuildしてherokuへ送信
+	4. heroku addons:create cleardb:ignite: mysqlをherokuに導入
+	5. heroku container:release web: 
 	
