@@ -1,10 +1,5 @@
-setup:
- addons:
-  - plan: cleardb
 build:
  docker:
   web: Dockerfile
-run:
- web: java -jar users-mysql.jar
   
   
