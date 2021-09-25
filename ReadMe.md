@@ -104,7 +104,7 @@
 	18. 依存関係やソースコードがjarファイルにまとめられイメージとしてビルドされる。コードを変更した場合はその都度maven installを行いjarファイルを最新の物して、imageを作り直す
 	19. dockerfileでイメージを作成し、docker-composeで複数のコンテナを同時に管理できる
 	20. dockerでthymeleafを使うには、templatesフォルダからの相対パスで書かれていたcontrollerの戻り値を、最初の/を消して指定する
-	21. dockerfile = 公式のイメージにオリジナルの処理を加えイメージを作成する docker-composeのimageプロパティ = 公式のイメージをそのままダウンロードしてイメージ作成
+	21. dockerfile = 公式のイメージにオリジナルの処理を加えイメージを作成する docker-composeのimageプロパティ = 公式のイメージをそのままダウンロードしてイメージ作成。docker-composeはローカル開発に使う。
 	22. コンテナを削除するとデータが消える方法　バインドマウント 1: 共有ストレージをコンテナにマウント(コンテナからHostOSのディレクトリを参照できる)する
 	23. コンテナ内のデータを永続化する方法　ボリューム: HostOSのDocker内にボリューム(データの永続的な保存領域)を作成
 	24. docker-composeのservices内に定義されているvolumes:バインドマウント、トップレベルのvolumes:ボリューム
@@ -119,6 +119,7 @@
 	
 	1. git init, git add ., git commitでプロジェクトをgitの管理下に置く
 	2. springプロジェクトのroot直下にsystem.propertiesファイルを配置、java.runtime.version=[pomに書かれているjavaのversion]を記載してHerokuで扱える
+	3. heroku create: herokuアプリの作成
 	3. git push heroku master
 	4. herokuのgitリポジトリー名、アプリ名を変更: heroku apps:rename [新しい名前]
 	5. mysqlをherokuにデプロイ: heroku addons:create cleardb:[ignite(mysqlを無料で扱う場合はignite)]
