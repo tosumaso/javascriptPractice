@@ -136,11 +136,22 @@
 		jarファイルの中にはmanifestが含まれている必要がある(manifestファイルの中にMainClassが定義されていないとno main manifest attributeエラーがでる)
 	11. herokuに上げたアプリの停止: heroku ps:scale web=0
 	
-16. Herokuデプロイ(Dockerデプロイ)
+16. Herokuデプロイ(Dockerデプロイ,heroku.yml)
+
+	docker-compose.ymlはherokuデプロイに対応していない。heroku.ymlを作成する。
+	1. heroku.ymlを作成,dockerfileはopenjdkをベースにして、jarファイルのコピーをrunする
+	2. herokuのアプリはgitで連携するため、git add .とcommitで変更履歴をherokuのrepositoryに反映させる
 
 	1. heroku container:login : Container Registrにログイン
-	2. heroku create : herokuアプリを作成
-	3. heroku container:push web: イメージをbuildしてherokuへ送信
-	4. heroku addons:create cleardb:ignite: mysqlをherokuに導入
-	5. heroku container:release web: 
+	2. heroku create : herokuアプリを作成,herokuのgitRepositoryが作成される
+	3. heroku addons:create cleardb:ignite [--version=mysqlのバージョン] : mysqlをherokuに導入
+	4. heroku container:release web: 
+	5. heroku config:set DATABASE _URL="CLEARDB_DATABASE_URL" : herokuでcleardbを使うための環境変数
+	6. heroku stack:set container : スタックをセット
+	7. git push heroku master: 変更を再びherokuのgitRepositoryにプッシュして変更を反映
+	8. heroku open
 	
+17. Dockerfile Command
+
+	1. CMD: docker runでコンテナを起動するときのコマンドまたは引数を指定。docker run時コマンドを上書きする
+	2. ENTRYPOINT: docker runでコンテナを起動するときのコマンドまたは引数を指定。CMDとは違いdocker run実行時にコマンドを追加する
