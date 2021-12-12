@@ -155,3 +155,4 @@
 
 	1. CMD: docker runでコンテナを起動するときのコマンドまたは引数を指定。docker run時コマンドを上書きする
 	2. ENTRYPOINT: docker runでコンテナを起動するときのコマンドまたは引数を指定。CMDとは違いdocker run実行時にコマンドを追加する
+	3. EXPOSE: Dockerコンテナ内で公開するポート番号を指定
