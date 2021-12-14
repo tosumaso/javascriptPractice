@@ -148,7 +148,7 @@ public class PracticeController {
 	
 	@GetMapping("/getCss")
 	public String getCss() {
-		return "/IndexCss";
+		return "IndexCss";
 	}
 	
 	@GetMapping("/getGlobalMenu")

@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div id="loader-wrap">
-		<div class="loader"></div>
+		
 	</div>
 
 	<div id="letterpopup">
@@ -28,7 +28,9 @@
 			<li><a href="#">お問い合わせ</a></li>
 		</ul>
 	</div>
-
+	<p hello:sayto="あいうえお" class="test3"></p>
+	<p hello:show></p>
+	<span th:text="${#doubleString.returnDouble('あいそん')}"></span>
 </body>
 </html>
 
