@@ -30,9 +30,9 @@ import practice.example.Form.SendPathForm;
 import practice.example.Repository.CategoryRepository;
 import practice.example.Repository.FavouriteRepository;
 import practice.example.Repository.ItemRepository;
-import practice.example.Repository.MountainRepository;
 import practice.example.Repository.PostRepository;
 import practice.example.Repository.UserRepository;
+import practice.example.Service.PracticeMountainService;
 
 @Controller
 public class PracticeController {
@@ -40,9 +40,6 @@ public class PracticeController {
 	// Jacksonライブラリ：JavaとJsonの変換を行う、インスタンスをDIコンテナ
 	@Autowired
 	ObjectMapper mapper;
-	
-	@Autowired
-	MountainRepository MtRepository;
 	
 	@Autowired
 	FavouriteRepository fvRepository;
@@ -59,20 +56,22 @@ public class PracticeController {
 	@Autowired
 	CategoryRepository categoryRepository;
 	
+	//interfaceを実装しているサービスをinjectするには実装元のinterfaceを@Autowiredで指定する
+	@Autowired
+	PracticeMountainService MtService; //Serviceをinject
+	
 	@GetMapping("/getAll")
 	@ResponseBody
 	public List<Mountain> all(){
-		return MtRepository.findAll();
+		List<Mountain> mountains = MtService.findAll();
+		return mountains;
 	}
 	
 	@GetMapping("/addMt")
 	@ResponseBody
 	public List<Mountain> addMt() {
-		Mountain m = new Mountain();
-		m.setName("マウント万");
-		m.setHeight(3776);
-		MtRepository.save(m);
-		return MtRepository.findAll();
+		List<Mountain> mountains = MtService.CreateOrUpdate("かかぎ", 34566);
+		return mountains;
 	}
 
 	@GetMapping("/getMain")
