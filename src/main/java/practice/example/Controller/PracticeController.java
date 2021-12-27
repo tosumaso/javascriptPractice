@@ -30,6 +30,7 @@ import practice.example.Form.SendPathForm;
 import practice.example.Repository.CategoryRepository;
 import practice.example.Repository.FavouriteRepository;
 import practice.example.Repository.ItemRepository;
+import practice.example.Repository.MountainRepository;
 import practice.example.Repository.PostRepository;
 import practice.example.Repository.UserRepository;
 import practice.example.Service.PracticeMountainService;
@@ -55,6 +56,9 @@ public class PracticeController {
 	
 	@Autowired
 	CategoryRepository categoryRepository;
+	
+	@Autowired
+	MountainRepository MtRepository;
 	
 	//interfaceを実装しているサービスをinjectするには実装元のinterfaceを@Autowiredで指定する
 	@Autowired
