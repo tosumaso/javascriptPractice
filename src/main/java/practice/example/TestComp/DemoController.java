@@ -39,4 +39,5 @@ public class DemoController {
 		String data = externalService.getExternalResource();
 		return CommonResponse.builder().data(data).build();
 	}
+
 }

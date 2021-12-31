@@ -39,4 +39,5 @@ public class PracticeService implements PracticeMountainService{
 		}
 		return findAll();
 	}
+
 }

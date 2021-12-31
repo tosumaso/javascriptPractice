@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.extern.slf4j.Slf4j;
 import practice.example.Entity.Category;
 import practice.example.Entity.Favourite;
 import practice.example.Entity.Item;
@@ -36,6 +37,7 @@ import practice.example.Repository.UserRepository;
 import practice.example.Service.PracticeMountainService;
 
 @Controller
+@Slf4j
 public class PracticeController {
 	
 	// Jacksonライブラリ：JavaとJsonの変換を行う、インスタンスをDIコンテナ

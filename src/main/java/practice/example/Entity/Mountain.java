@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ajaxData")
+@Table(name="mountain")
 public class Mountain {
 
 	@Id
@@ -22,6 +22,17 @@ public class Mountain {
 	private Integer height;
 	
 
+	public Mountain(Integer id, String name, Integer height) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.height = height;
+	}
+
+	public Mountain() {
+
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -45,6 +56,5 @@ public class Mountain {
 	public void setHeight(Integer height) {
 		this.height = height;
 	}
-	
 	
 }
