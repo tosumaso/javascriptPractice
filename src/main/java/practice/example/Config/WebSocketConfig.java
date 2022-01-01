@@ -21,4 +21,5 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		registry.addEndpoint("/endpoint").withSockJS(); //エンドポイントを登録、websocketを扱うSockJSを有効化
 	}
+	
 }

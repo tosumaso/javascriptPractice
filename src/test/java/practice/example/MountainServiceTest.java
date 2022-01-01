@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
@@ -27,7 +26,7 @@ import practice.example.Service.PracticeMountainService;
 
 @Slf4j
 @SpringBootTest
-@TestPropertySource(locations="classpath:application.properties") //Test時に読み込む設定ファイルを"src/test/resources"からの相対パスで明示的に指定
+//@TestPropertySource(locations="classpath:test.properties") //Test時に読み込む設定ファイルを"src/test/resources"からの相対パスで明示的に指定
 @DbUnitConfiguration(dataSetLoader = CsvDataSetLoader.class) //DbUnitの設定、dataSetLoader = DBのデータ定義ファイルの種類を指定(csvで読み込むために"AbstractDataSetLoader"を継承したクラスを作成)
 @TestExecutionListeners({
 	DependencyInjectionTestExecutionListener.class,
