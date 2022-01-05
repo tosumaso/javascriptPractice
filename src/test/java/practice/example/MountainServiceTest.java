@@ -21,6 +21,8 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 import lombok.extern.slf4j.Slf4j;
 import practice.example.Entity.Mountain;
+import practice.example.Entity.User;
+import practice.example.Repository.UserRepository;
 import practice.example.Service.PracticeMountainService;
 
 
@@ -38,6 +40,9 @@ public class MountainServiceTest {
 	@Autowired
 	private PracticeMountainService mountainService;
 	
+	@Autowired
+	private UserRepository userRepository;
+	
 	@Test
 	@DatabaseSetup("/testdata/init-data") //Testメソッドを実行する前に"src/test/resources"下のパスにある初期データを投入
 	@ExpectedDatabase(value="/testdata/init-data", assertionMode= DatabaseAssertionMode.NON_STRICT_UNORDERED)
@@ -54,4 +59,16 @@ public class MountainServiceTest {
 			assertEquals(expected.get(i).getName(), actual.get(i).getName()); 
 		}
 	}
+	@Test
+	@DatabaseSetup("/testdata/init-data")
+	@ExpectedDatabase(value="/testdata/init-data", assertionMode= DatabaseAssertionMode.NON_STRICT_UNORDERED)
+	void getUserPost() {
+		User expected = new User();
+		expected.setName("テストユーザー1");
+		expected.setPassword("あいうえお");
+		User actual = userRepository.findById(1).get();
+		assertEquals(expected.getName(),actual.getName());
+	}
+	
+	
 }

@@ -66,6 +66,20 @@ public class PracticeController {
 	@Autowired
 	PracticeMountainService MtService; //Serviceをinject
 	
+	@GetMapping("/getUserPost")
+	@ResponseBody
+	public Post getUserPost() {
+		Post post = postRepository.getById(1);
+		return post;
+	}
+	
+	@GetMapping("/getaaa")
+	@ResponseBody
+	public User getaaa() {
+		User user = userRepository.getById(1);
+		return user;
+	}
+	
 	@GetMapping("/getAll")
 	@ResponseBody
 	public List<Mountain> all(){

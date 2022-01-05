@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -21,11 +21,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import lombok.extern.slf4j.Slf4j;
+import practice.example.TestComp.DemoController;
 import practice.example.TestComp.DemoService;
 import practice.example.TestComp.ExternalService;
 import practice.example.TestComp.LogFilter;
 
-@SpringBootTest
+//@SpringBootTest
+@WebMvcTest(DemoController.class) //@WebMvcTest: コントローラーのテストに必要なbeanのみを読み込む それ以外のbeanはMockする必要がある
 @AutoConfigureMockMvc
 @Slf4j
 class DemoControllerWithMockTest {
@@ -37,12 +39,13 @@ class DemoControllerWithMockTest {
   @Autowired LogFilter logFilter;
 
   @MockBean DemoService demoService;         // Mock化してDIコンテナに登録する
-  @MockBean ExternalService externalService; // 〃
+  @MockBean ExternalService externalService; //
 
   @BeforeEach
   void beforeEach() {
 //    MockitoAnnotations.initMocks(this); deprecated?
 	  MockitoAnnotations.openMocks(this);
+	//本番環境と同じ環境でテストするためにサーバーをmockする
     mockMvc =
         MockMvcBuilders.webAppContextSetup(webApplicationContext)
             .addFilter(logFilter, "/*")
